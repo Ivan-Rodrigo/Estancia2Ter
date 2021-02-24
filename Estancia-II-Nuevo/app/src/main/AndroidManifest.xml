@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.VetaEstancia30">
-        <activity android:name=".AddClientesActivity"></activity>
+        <activity android:name=".EditarClientesActivity"></activity>
+        <activity android:name=".AddClientesActivity" />
         <activity android:name=".VerDatosVentasActivity" />
         <activity android:name=".EditarProductosActivity" />
         <activity android:name=".VerDatosProductosActivity" />

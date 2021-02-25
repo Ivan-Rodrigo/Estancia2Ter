@@ -84,11 +84,44 @@ public class PaginaInicioActivity extends AppCompatActivity {
 
         btnBusca.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) { //Clientes
                 select = spinner.getSelectedItem().toString();
                 if(select.equals("Clientes")){
                     list.setAdapter(adaptadorClien);
                     buscarClentes("http://192.168.8.3/Android/reporteCliente.php");
+                    list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                            ProgressDialog progressDialog = new ProgressDialog(view.getContext());
+
+                            CharSequence[] dialaogoItem ={"Ver Datos","Editar Datos","Eliminar Datos"};
+                            builder.setTitle(clients.get(position).getNombre());
+                            builder.setItems(dialaogoItem, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int i) {
+                                    switch (i){
+                                        case 0:
+                                            startActivity(new Intent(getApplicationContext(),VerDatosClientesActivity.class)
+                                                    .putExtra("position",position));
+
+                                            break;
+                                        case 1:
+                                            startActivity(new Intent(getApplicationContext(),EditarClientesActivity.class)
+                                                    .putExtra("position",position));
+                                            break;
+
+                                        case 2:
+                                            String id=clients.get(position).getId();
+                                            deleteClients("http://192.168.8.3/Android/deleteClientes.php",id);
+                                            break;
+
+                                    }
+                                }
+                            });
+                            builder.create().show();
+                        }
+                    });
 
                     clients.clear();
 
@@ -207,6 +240,14 @@ public class PaginaInicioActivity extends AppCompatActivity {
                 }
                 else if(selectAdd.equals("Clientes")){
                     startActivity(new Intent(PaginaInicioActivity.this,AddClientesActivity.class));
+                }
+                else if(selectAdd.equals("Categoria")){
+                    Toast.makeText(PaginaInicioActivity.this, "Lo Siento no se Puede agregar en ese Rubro", Toast.LENGTH_SHORT).show();
+
+                }
+                else if(selectAdd.equals("Usuarios")|| selectAdd.equals("Ventas")){
+                    Toast.makeText(PaginaInicioActivity.this, "Lo Siento no se Puede agregar en ese Rubro", Toast.LENGTH_SHORT).show();
+
                 }
 
             }
@@ -441,7 +482,56 @@ public class PaginaInicioActivity extends AppCompatActivity {
 
     }
 
-    public void buscarVentas(String URL){
+    private void deleteClients(String URL,String idCli){//Borra Clientes
+
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Cargando....");
+        progressDialog.show();
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                System.out.println(response);
+
+                if(!response.isEmpty()){
+                    Toast.makeText(PaginaInicioActivity.this, response, Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(),PaginaInicioActivity.class));
+                    finish();
+                    progressDialog.dismiss();
+                }else {
+                    Toast.makeText(PaginaInicioActivity.this,"Algo Salio mal",Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("--------------------------");
+                System.out.println("cai aki");
+                System.out.println(error.toString());
+                System.out.println("__________________________");
+                Toast.makeText(PaginaInicioActivity.this,error.toString(),Toast.LENGTH_SHORT).show();
+
+            }
+        }){
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+
+                Map<String,String> parametros = new HashMap<String, String>();
+
+                parametros.put("id",idCli);
+
+                return parametros;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+
+    }
+
+    public void buscarVentas(String URL){//ventas
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

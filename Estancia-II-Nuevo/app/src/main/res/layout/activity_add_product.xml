@@ -123,6 +123,15 @@
                 android:inputType="date"
                 android:paddingLeft="5dp" />
 
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="8dp"
+                 />
+
             <Button
                 android:id="@+id/btnImagen"
 
@@ -144,7 +153,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="2dp"
                 android:layout_marginRight="15dp"
                 android:text="Agregar"
                 android:textColor="#FFF"

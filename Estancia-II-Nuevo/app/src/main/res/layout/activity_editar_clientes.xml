@@ -4,6 +4,122 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo1"
     tools:context=".EditarClientesActivity">
 
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:gravity="center"
+            android:orientation="vertical">
+            <EditText
+                android:id="@+id/edtNombreCLiedit"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="8dp"
+                android:background="#B2BFE1CB"
+                android:backgroundTint="@android:color/darker_gray"
+                android:ems="10"
+                android:hint="Nombre"
+
+                android:inputType="text"
+                android:paddingLeft="5dp" />
+
+            <EditText
+                android:id="@+id/edtDocumentoedit"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="8dp"
+                android:background="#B2BFE1CB"
+                android:backgroundTint="@android:color/darker_gray"
+                android:ems="10"
+                android:hint="Documento"
+
+                android:inputType="text"
+                android:paddingLeft="5dp" />
+
+            <EditText
+                android:id="@+id/edtEmailEdit"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="8dp"
+                android:background="#B2BFE1CB"
+                android:backgroundTint="@android:color/darker_gray"
+                android:ems="10"
+                android:hint="Email"
+
+                android:inputType="text"
+                android:paddingLeft="5dp" />
+            <EditText
+                android:id="@+id/edtTelefonoEdit"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="8dp"
+                android:background="#B2BFE1CB"
+                android:backgroundTint="@android:color/darker_gray"
+                android:ems="10"
+                android:hint="Telefono"
+
+                android:inputType="text"
+                android:paddingLeft="5dp" />
+
+            <EditText
+                android:id="@+id/edtDireccionEdit"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="8dp"
+                android:background="#B2BFE1CB"
+                android:backgroundTint="@android:color/darker_gray"
+                android:ems="10"
+                android:hint="Direccion"
+
+                android:inputType="text"
+                android:paddingLeft="5dp" />
+
+            <EditText
+                android:id="@+id/edtFechaNacEdit"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="8dp"
+                android:background="#B2BFE1CB"
+                android:backgroundTint="@android:color/darker_gray"
+                android:ems="10"
+                android:hint="Fecha-Nacimiento"
+
+                android:inputType="text"
+                android:paddingLeft="5dp" />
+
+            <Button
+                android:id="@+id/btnEditarCliente"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="15dp"
+                android:text="Editar"
+                android:textColor="#FFF"
+                android:textSize="18sp"
+                app:backgroundTint="#AD0223F8" />
+
+        </LinearLayout>
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

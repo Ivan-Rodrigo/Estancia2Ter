@@ -3,6 +3,8 @@
     package="com.example.vetaestancia30">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -11,7 +13,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.VetaEstancia30">
-        <activity android:name=".EditarClientesActivity"></activity>
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".VerDatosClientesActivity" />
+        <activity android:name=".EditarClientesActivity" />
         <activity android:name=".AddClientesActivity" />
         <activity android:name=".VerDatosVentasActivity" />
         <activity android:name=".EditarProductosActivity" />
@@ -22,11 +32,7 @@
         <activity android:name=".RegistroUsuActivity" />
         <activity android:name=".PrincipalActivity" />
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

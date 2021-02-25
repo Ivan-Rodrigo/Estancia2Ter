@@ -1,17 +1,21 @@
 package com.example.vetaestancia30;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -24,6 +28,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -40,6 +45,9 @@ public class AddProductActivity extends AppCompatActivity {
     EditText edtcodigo,edtdescripcion,edtstock,edtprecioCom,edtprecioVen,edtfecha;
     Spinner spinner;
     Button btnCargarImage,agregar;
+    ImageView imageView;
+    VerDatosClientesActivity ver;
+    Uri imagen;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -56,6 +64,7 @@ public class AddProductActivity extends AppCompatActivity {
         edtprecioVen=(EditText)findViewById(R.id.preciov);
         edtfecha=(EditText)findViewById(R.id.fechar);
         agregar=(Button)findViewById(R.id.btnAgregarProduc);
+        imageView=(ImageView)findViewById(R.id.imageView3);
 
         btnCargarImage=(Button)findViewById(R.id.btnImagen);
         LocalDate fecha =  LocalDate.now();
@@ -82,7 +91,8 @@ public class AddProductActivity extends AppCompatActivity {
         btnCargarImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showFileChooser();
+                cargarImagen();
+                //showFileChooser();
             }
         });
 
@@ -121,14 +131,14 @@ public class AddProductActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                String ima="Hola";
+                //String ima=getStringImagen(bitmap);
                 String ventas="0";
                 String cate=String.valueOf(spinner.getSelectedItemPosition()+1);
                 Map<String,String> parametros = new HashMap<String, String>();
                 parametros.put("id_categoria",cate);
                 parametros.put("codigo",edtcodigo.getText().toString());
                 parametros.put("descripcion",edtdescripcion.getText().toString());
-                parametros.put("imagen",ima);
+                parametros.put("imagen",imagen.toString());
                 parametros.put("stock",edtstock.getText().toString());
                 parametros.put("precio_compra",edtprecioCom.getText().toString());
                 parametros.put("precio_venta",edtprecioVen.getText().toString());
@@ -152,13 +162,56 @@ public class AddProductActivity extends AppCompatActivity {
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Imagen"), PICK_IMAGE_REQUEST);
     }
+
+   /* @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            Uri filePath = data.getData();
+            try {
+                //Cómo obtener el mapa de bits de la Galería
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                //Configuración del mapa de bits en ImageView
+                imageView.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    */
+
     //aqui extraigo la direccion de la imagen en un string para guardarlo
     public String getStringImagen(Bitmap bmp){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] imageBytes = baos.toByteArray();
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+
         return encodedImage;
     }
 
+    private void cargarImagen() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setType("image/");
+        startActivityForResult(intent.createChooser(intent,"Seleccione la Aplicacion"),10);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            Uri path = data.getData();
+            System.out.println("---------------------------------");
+            System.out.println(path);
+            imagen=path;
+            System.out.println(imagen);
+            System.out.println("---------------------------------");
+
+            imageView.setImageURI(path);
+        }
+
+
+    }
 }

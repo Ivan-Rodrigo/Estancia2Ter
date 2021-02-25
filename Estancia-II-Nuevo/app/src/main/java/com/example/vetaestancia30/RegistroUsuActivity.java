@@ -23,7 +23,7 @@ import java.util.Map;
 public class RegistroUsuActivity extends AppCompatActivity {
 
     EditText edtUsu,edtCorreo,edtPass;
-    Button btnAdd;
+    Button btnAdd,btnIrLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +34,19 @@ public class RegistroUsuActivity extends AppCompatActivity {
         edtCorreo = (EditText)findViewById(R.id.edtCorreo);
         edtPass= (EditText)findViewById(R.id.edtRegisPassword);
         btnAdd = (Button)findViewById(R.id.btnRegistrase);
+        btnIrLogin=(Button)findViewById(R.id.btnIrLogin);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                AddUsu("http://192.168.8.3/Android/addUsuario.php");
+            }
+        });
+        btnIrLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(intent);
             }
         });
 

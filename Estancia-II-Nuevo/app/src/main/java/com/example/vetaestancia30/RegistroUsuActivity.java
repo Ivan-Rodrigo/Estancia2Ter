@@ -39,7 +39,7 @@ public class RegistroUsuActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               AddUsu("http://192.168.8.3/Android/addUsuario.php");
+               AddUsu("http://192.168.8.2/Android/addUsuario.php");
             }
         });
         btnIrLogin.setOnClickListener(new View.OnClickListener() {

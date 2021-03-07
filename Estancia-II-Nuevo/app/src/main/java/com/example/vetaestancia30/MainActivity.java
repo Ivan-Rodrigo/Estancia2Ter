@@ -35,9 +35,11 @@ public class MainActivity extends AppCompatActivity {
         btnRegis=(Button) findViewById(R.id.btnirRegis) ;
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                valida("http://192.168.8.3/Android/validar.php");
+                valid();
+                valida("http://192.168.8.2/Android/validar.php");
             }
         });
 
@@ -52,15 +54,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void valida(String URL){
+
+
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                System.out.println(response);
                 if(!response.isEmpty()){
                     Intent intent = new Intent(getApplicationContext(),PaginaInicioActivity.class);
                     startActivity(intent);
-                }else {
+                }else if (response.isEmpty()) {
                     Toast.makeText(MainActivity.this,"USUARIO O CONTRASEÑA INCORRECTA ",Toast.LENGTH_SHORT).show();
                 }
+
+
 
             }
         }, new Response.ErrorListener() {
@@ -86,5 +93,20 @@ public class MainActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
 
+    }
+
+    public  boolean valid(){
+        String usu,pass;
+        boolean bandera=true;
+        usu = edtUsuario.getText().toString();
+        pass = edtPassword.getText().toString();
+        if(pass.equals("")&& usu.equals("")){
+            Toast.makeText(MainActivity.this, "Ha dejado campos vacios",
+                    Toast.LENGTH_LONG).show();
+            edtUsuario.requestFocus();
+            bandera = false;
+
+        }
+        return bandera;
     }
 }

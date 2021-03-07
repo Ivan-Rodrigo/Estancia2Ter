@@ -64,7 +64,7 @@ public class EditarProductosActivity extends AppCompatActivity {
         editar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditProducto("http://192.168.8.3/Android/updateProdcts.php");
+                EditProducto("http://192.168.8.2/Android/updateProdcts.php");
             }
         });
 

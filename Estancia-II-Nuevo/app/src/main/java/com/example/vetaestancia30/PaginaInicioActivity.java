@@ -88,7 +88,7 @@ public class PaginaInicioActivity extends AppCompatActivity {
                 select = spinner.getSelectedItem().toString();
                 if(select.equals("Clientes")){
                     list.setAdapter(adaptadorClien);
-                    buscarClentes("http://192.168.8.3/Android/reporteCliente.php");
+                    buscarClentes("http://192.168.8.2/Android/reporteCliente.php");
                     list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -113,7 +113,7 @@ public class PaginaInicioActivity extends AppCompatActivity {
 
                                         case 2:
                                             String id=clients.get(position).getId();
-                                            deleteClients("http://192.168.8.3/Android/deleteClientes.php",id);
+                                            deleteClients("http://192.168.8.2/Android/deleteClientes.php",id);
                                             break;
 
                                     }
@@ -127,7 +127,7 @@ public class PaginaInicioActivity extends AppCompatActivity {
 
                 }else if(select.equals("Productos")){//Productos
                     list.setAdapter(adaptadorProdu);
-                    buscarProductos("http://192.168.8.3/Android/reporteProducto.php");
+                    buscarProductos("http://192.168.8.2/Android/reporteProducto.php");
                     list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -153,7 +153,7 @@ public class PaginaInicioActivity extends AppCompatActivity {
 
                                         case 2:
                                             String id=products.get(position).getId();
-                                            deleteProducts("http://192.168.8.3/Android/deleteProduts.php",id);
+                                            deleteProducts("http://192.168.8.2/Android/deleteProduts.php",id);
                                             break;
                                     }
                                 }
@@ -166,7 +166,7 @@ public class PaginaInicioActivity extends AppCompatActivity {
 
                 } else if(select.equals("Usuarios")){ //Usuarios
                     list.setAdapter(adaptadorUsu);
-                    buscar("http://192.168.8.3/Android/reporteUsuarios.php");
+                    buscar("http://192.168.8.2/Android/reporteUsuarios.php");
                     list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -195,7 +195,7 @@ public class PaginaInicioActivity extends AppCompatActivity {
                 }else if(select.equals("Ventas"))//Ventas
                 {
                     list.setAdapter(adaptadorVentas);
-                    buscarVentas("http://192.168.8.3/Android/reporteVentas.php");
+                    buscarVentas("http://192.168.8.2/Android/reporteVentas.php");
                     list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -223,7 +223,7 @@ public class PaginaInicioActivity extends AppCompatActivity {
                     Ventas.clear();
                 }else if(select.equals("Categorias")){
                     list.setAdapter(adaptadorCategorias);
-                    buscar("http://192.168.8.3/Android/reporteCategoria.php");
+                    buscar("http://192.168.8.2/Android/reporteCategoria.php");
                     Categorias.clear();
                 }
 

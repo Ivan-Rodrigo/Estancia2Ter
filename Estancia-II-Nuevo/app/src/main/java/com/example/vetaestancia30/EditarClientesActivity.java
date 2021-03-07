@@ -56,7 +56,7 @@ public class EditarClientesActivity extends AppCompatActivity {
         editar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditCliente("http://192.168.8.3/Android/updateClientes.php");
+                EditCliente("http://192.168.8.2/Android/updateClientes.php");
             }
         });
 

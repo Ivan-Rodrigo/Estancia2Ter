@@ -84,7 +84,7 @@ public class AddProductActivity extends AppCompatActivity {
         agregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddProducto("http://192.168.8.3/Android/addProducto.php");
+                AddProducto("http://192.168.8.2/Android/addProducto.php");
 
             }
         });

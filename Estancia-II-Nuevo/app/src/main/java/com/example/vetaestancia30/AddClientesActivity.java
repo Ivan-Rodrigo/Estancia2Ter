@@ -54,7 +54,7 @@ public class AddClientesActivity extends AppCompatActivity {
         agregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddClients("http://192.168.8.3/Android/addClientes.php");
+                AddClients("http://192.168.8.2/Android/addClientes.php");
             }
         });
     }
